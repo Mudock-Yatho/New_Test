@@ -57,33 +57,31 @@ Con(game:GetService'Players'.PlayerRemoving,function(Player)
 	end
 end)
 local Deb={}
-Con(wfc(game:GetService'ReplicatedStorage','Obj').OnServerEvent,function(Player,Damage)
+Con(wfc(game:GetService'ReplicatedStorage','Obj').OnServerEvent,function(Player,Damage) -- Fall damage.
 	if not Damage or type(Damage)~='number'or Damage<=0 or Deb[Player.UserId]then
 		warn('['..Player.Name..'|'..Player.UserId..'] Tried to fire `Obj` incorrectly!')
 		Player:Kick'Stop.'
 		return
 	end
 	Deb[Player.UserId]=true
-	if Player.Character and Player.Character:FindFirstChild'Humanoid'then
-		if Player.Character:FindFirstChild'Head'then
-			local zZ=Instance.new'BillboardGui'
-			zZ.Adornee=Player.Character:FindFirstChild'Head'
-			zZ.Active = true
-			zZ.StudsOffset = Vector3.new(0,4,0)
-			zZ.Size = UDim2.new(0, 200, 0, 50)
-			local xX = Instance.new'TextLabel'
-			xX.Text = '-'..Damage
-			xX.Active = true
-			xX.BackgroundTransparency = 1
-			xX.ClipsDescendants = true
-			xX.TextColor3 = BrickColor.Red().Color
-			xX.Font = Enum.Font.Fantasy
-			xX.TextScaled = true
-			xX.Size = UDim2.new(0, 200, 0, 50)
-			xX.Parent=zZ
-			zZ.Parent=Player.Character:FindFirstChild'Head'
-			game:GetService'Debris':AddItem(zZ,1.5)
-		end
+	if Player.Character and Player.Character:FindFirstChild'Humanoid'and Player.Chatacter:FindFirstChild'Head'then
+		local zZ=Instance.new'BillboardGui'
+		zZ.Adornee=Player.Character:FindFirstChild'Head'
+		zZ.Active = true
+		zZ.StudsOffset = Vector3.new(0,4,0)
+		zZ.Size = UDim2.new(0, 200, 0, 50)
+		local xX = Instance.new'TextLabel'
+		xX.Text = '-'..Damage
+		xX.Active = true
+		xX.BackgroundTransparency = 1
+		xX.ClipsDescendants = true
+		xX.TextColor3 = BrickColor.Red().Color
+		xX.Font = Enum.Font.Fantasy
+		xX.TextScaled = true
+		xX.Size = UDim2.new(0, 200, 0, 50)
+		xX.Parent=zZ
+		zZ.Parent=Player.Character:FindFirstChild'Head'
+		game:GetService'Debris':AddItem(zZ,1.5)
 		Player.Character:FindFirstChild'Humanoid':TakeDamage(Damage)
 	end
 	wait(.15)
