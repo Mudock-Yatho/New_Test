@@ -1,5 +1,9 @@
 --[[
-	The server's main script.
+	The server's main script that handles stats and remotes.
+	Last updated: 8/3/2018
+	
+	Quite a few things are localized here that you may notice aren't used, this is because I've removed **1** part of the
+	script that isn't open-sourced.
 ]]--
 local wfc,dss=game.WaitForChild,game:GetService'DataStoreService':GetDataStore'Stats1'
 local mc,Con,wa,war,bj,ts=math.ceil,game.ChildAdded.Connect,wait,warn,wfc(workspace,'Spawns').BreakJoints,tostring
