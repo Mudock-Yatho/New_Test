@@ -1,6 +1,6 @@
 --[[
 	The LocalScript that handles Guis.
-	Last updated: 8/3/2018
+	Last updated: 8/4/2018
 ]]--
 game:GetService'StarterGui':SetCoreGuiEnabled(Enum.CoreGuiType.Backpack,false)
 game:GetService'StarterGui':SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,false)
