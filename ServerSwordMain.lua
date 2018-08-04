@@ -1,6 +1,6 @@
 --[[
 	The main Script that handles swords.
-	Last updated: 8/3/2018
+	Last updated: 8/4/2018
 ]]--
 local Enabled,Handle,mr,Con,Debris,Trail,TakeDamage=false,script.Parent:WaitForChild'Handle',math.random,game.ChildAdded.Connect,game:GetService'Debris',script.Parent:WaitForChild'Blade':WaitForChild'Trail'
 local AI,Anims,mr,mrs,t=Debris.AddItem,{},math.random,math.randomseed,tick
@@ -31,7 +31,7 @@ Con(script.Parent.Activated,function()
 	Trail.Enabled=true
 	Handle:WaitForChild'Slice':Play()
 	Ev=Con(Handle.Touched,function(Part)
-		if not Part.Parent or not Part.Parent.Parent or Part:IsDescendantOf(script.Parent.Parent)then
+		if not Part.Parent.Parent or Part:IsDescendantOf(script.Parent.Parent)then
 			return
 		end
 		local Hum=Part.Parent:FindFirstChild'Humanoid'or Part.Parent.Parent:FindFirstChild'Humanoid'
