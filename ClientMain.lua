@@ -73,10 +73,7 @@ Con(game:GetService'RunService'.Heartbeat,function()
 			end
 		elseif sideDifference < 10 and saveYPosition then
 			local totalFallDistance = saveYPosition - newYPosition
-			if math.abs(totalFallDistance)>=10 and Hum:GetState()~=Enum.HumanoidStateType.Swimming then
-				if PlayerIsGrounded()and PlayerIsGrounded():IsA'Terrain'then
-					warn(PlayerIsGrounded(),'\n',PlayerIsGrounded().Material,'\n',PlayerIsGrounded().FrontSurface)
-				end
+			if math.abs(totalFallDistance)>=10 and Hum:GetState()~=Enum.HumanoidStateType.Swimming and Hum.FloorMaterial~=Enum.Material.Water then
 				FS(Event,math.min(Round(totalFallDistance,.5),Hum.MaxHealth*.9))
 			end
 			saveYPosition = nil
