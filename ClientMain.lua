@@ -1,5 +1,5 @@
 --[[
-	The LocalScript that handles the client side's fall damage and running/equipping.
+	The LocalScript that handles the client side's fall damage and running.
 	Last updated: 8/4/2018
 ]]--
 local UIS,Hum,Sprint=game:GetService'UserInputService',script.Parent:WaitForChild'Humanoid'
