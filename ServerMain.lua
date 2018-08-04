@@ -58,6 +58,6 @@ Con(wfc(game:GetService'ReplicatedStorage','Obj').OnServerEvent,function(Player,
 	wa(.15)
 	Deb[Player.UserId]=nil
 end)
-while wa(.25)do
-	game:GetService'Lighting'.ClockTime=game:GetService'Lighting'.ClockTime+.025
+while wa(.5)do
+	game:GetService'Lighting'.ClockTime=game:GetService'Lighting'.ClockTime+.015
 end
