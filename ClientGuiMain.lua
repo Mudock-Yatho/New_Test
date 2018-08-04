@@ -64,6 +64,7 @@ if not GameMusic then
 end
 wait()
 GameMusic:Play()
+Par:WaitForChild'Settings':WaitForChild'Frame':WaitForChild'MV'.Text='Music Volume: '..tostring(GameMusic.Volume)
 Con(Par:WaitForChild'Settings':WaitForChild'Frame':WaitForChild'Add'.MouseButton1Click,function()
 	MV.Value=MV.Value+.25
 	GameMusic.Volume=MV.Value
