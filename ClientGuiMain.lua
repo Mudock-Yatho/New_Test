@@ -1,5 +1,5 @@
 --[[
-	The LocalScript that handles Guis.
+	The LocalScript that handles Guis and equipping/unequipping tools.
 	Last updated: 8/4/2018
 ]]--
 game:GetService'StarterGui':SetCoreGuiEnabled(Enum.CoreGuiType.Backpack,false)
@@ -19,14 +19,16 @@ Con(Par:WaitForChild'1'.MouseButton1Click,function()
 end)
 Con(UIS.InputBegan,function(Key,Gc)
 	if Gc then return end
-	if Key.UserInputType==Enum.UserInputType.Keyboard and Key.KeyCode==Enum.KeyCode.One then
-		if not Ch:FindFirstChildOfClass'Tool'then
-			if Ch:WaitForChild'Humanoid':GetState()==Enum.HumanoidStateType.Swimming then
-				return
+	if Key.UserInputType==Enum.UserInputType.Keyboard then
+		if Key.KeyCode==Enum.KeyCode.One then
+			if not Ch:FindFirstChildOfClass'Tool'then
+				if Ch:WaitForChild'Humanoid':GetState()==Enum.HumanoidStateType.Swimming then
+					return
+				end
+				Ch:WaitForChild'Humanoid':EquipTool(BP:WaitForChild'Sword')
+			else
+				Ch:WaitForChild'Humanoid':UnequipTools()
 			end
-			Ch:WaitForChild'Humanoid':EquipTool(BP:WaitForChild'Sword')
-		else
-			Ch:WaitForChild'Humanoid':UnequipTools()
 		end
 	end
 end)
