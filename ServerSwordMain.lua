@@ -1,5 +1,5 @@
 --[[
-	The main script for swords.
+	The main Script that handles swords.
 	Last updated: 8/3/2018
 ]]--
 local Enabled,Handle,mr,Con,Debris,Trail,TakeDamage=false,script.Parent:WaitForChild'Handle',math.random,game.ChildAdded.Connect,game:GetService'Debris',script.Parent:WaitForChild'Blade':WaitForChild'Trail'
