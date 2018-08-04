@@ -12,16 +12,22 @@ Con(game:GetService'Players'.PlayerAdded,function(Player)
 	Stats.Name='Stats'
 	local Level=Instance.new'NumberValue'
 	Level.Name='Level'
-	local Experience=Instance.new'NumberValue'
-	Experience.Name='Experience'
-	local Strength=Instance.new'NumberValue'
-	Strength.Name='Strength'
-	local Endurance=Instance.new'NumberValue'
-	Endurance.Name='Endurance'
-	local Agility=Instance.new'NumberValue'
-	Agility.Name='Agility'
-	local Perception=Instance.new'NumberValue'
-	Perception.Name='Perception'
+	Level.Parent=Stats
+	local Exp=Instance.new'NumberValue'
+	Exp.Name='Experience'
+	Exp.Parent=Stats
+	local Str=Instance.new'NumberValue'
+	Str.Name='Strength'
+	Str.Parent=Stats
+	local End=Instance.new'NumberValue'
+	End.Name='Endurance'
+	End.Parent=Stats
+	local Agi=Instance.new'NumberValue'
+	Agi.Name='Agility'
+	Agi.Parent=Stats
+	local Per=Instance.new'NumberValue'
+	Per.Name='Perception'
+	Per.Parent=Stats
 	Stats.Parent=Player
 	-- Snipped non-open-sourced code.
 end)
