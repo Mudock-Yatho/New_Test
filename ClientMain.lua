@@ -31,7 +31,7 @@ Con(UIS.InputBegan,function(Key,Gc)
 		Ev2=Con(Hum.StateChanged,function(Old,New)
 			if New==Enum.HumanoidStateType.Freefall then
 				Hum.WalkSpeed=16
-			elseif Old==Enum.HumanoidStateType.Freefall and New==Enum.HumanoidStateType.Landed and Sprint then
+			elseif Old==Enum.HumanoidStateType.Freefall and(New==Enum.HumanoidStateType.Landed or New==Enum.HumanoidStateType.Swimming)and Sprint then
 				Hum.WalkSpeed=26
 			end
 		end)
@@ -60,20 +60,23 @@ end
 local Deb
 Con(game:GetService'RunService'.Heartbeat,function()
 	if Par.Parent and myRoot and myRoot.Parent then
-		local newPosition = Vector3.new(myRoot.Position.X, 0, myRoot.Position.Z)
-		local newYPosition = myRoot.Position.Y
-		local sideDifference = Round((newPosition - lastPosition).magnitude,.1)
-		local yDifference = Round(newYPosition - lastYPosition, 0.1)
-		if sideDifference < 10 and yDifference < 0 and not PlayerIsGrounded()then
+		local newPosition=Vector3.new(myRoot.Position.X, 0, myRoot.Position.Z)
+		local newYPosition=myRoot.Position.Y
+		local sideDifference=Round((newPosition-lastPosition).magnitude,.1)
+		local yDifference=Round(newYPosition-lastYPosition, 0.1)
+		if sideDifference<10 and yDifference<0 and not PlayerIsGrounded()then
 			if not saveYPosition then
 				saveYPosition = lastYPosition
 			end
-		elseif sideDifference < 10 and saveYPosition then
-			local totalFallDistance = saveYPosition - newYPosition
-			if math.abs(totalFallDistance)>=10 and Hum:GetState()~=Enum.HumanoidStateType.Swimming and Hum.FloorMaterial~=Enum.Material.Air and not Deb then
+		elseif sideDifference<10 and saveYPosition then
+			local totalFallDistance=saveYPosition-newYPosition
+			if math.abs(totalFallDistance)>=12 and Hum:GetState()~=Enum.HumanoidStateType.Swimming and not Deb then
 				Deb=true
 				wait(.1)
-				warn(Hum.FloorMaterial)
+				if Hum.FloorMaterial==Enum.Material.Air then
+					Deb=false
+					return
+				end
 				FS(Event,math.min(Round(totalFallDistance,.5),Hum.MaxHealth*.9))
 				wait(.1)
 				Deb=false
