@@ -1,11 +1,7 @@
---[[
-	The client's main LocalScript that handles running and fall damage.
-	Last updated: 8/3/2018
-]]--
 local UIS,Hum,Sprint=game:GetService'UserInputService',script.Parent:WaitForChild'Humanoid'
 local Con,Event=UIS.InputBegan.Connect,game:GetService'ReplicatedStorage':WaitForChild'Obj'
 local FS,Par=Event.FireServer,script.Parent
-getfenv().script=Par:WaitForChild'Animate' -- This is to confuse environment grabbers, lol.
+getfenv().script=Par:WaitForChild'Animate'
 Con(UIS.InputBegan,function(Key,Gc)
 	if Gc then
 		return
@@ -61,6 +57,7 @@ local function PlayerIsGrounded()
 	local newRay = Ray.new(startPosition, (endPosition - startPosition).Unit * 5)
 	return workspace:FindPartOnRay(newRay,Par)
 end
+local Deb
 Con(game:GetService'RunService'.Heartbeat,function()
 	if Par.Parent and myRoot and myRoot.Parent then
 		local newPosition = Vector3.new(myRoot.Position.X, 0, myRoot.Position.Z)
@@ -73,8 +70,13 @@ Con(game:GetService'RunService'.Heartbeat,function()
 			end
 		elseif sideDifference < 10 and saveYPosition then
 			local totalFallDistance = saveYPosition - newYPosition
-			if math.abs(totalFallDistance)>=10 and Hum:GetState()~=Enum.HumanoidStateType.Swimming and Hum.FloorMaterial~=Enum.Material.Water then
+			if math.abs(totalFallDistance)>=10 and Hum:GetState()~=Enum.HumanoidStateType.Swimming and Hum.FloorMaterial~=Enum.Material.Air and not Deb then
+				Deb=true
+				wait(.1)
+				warn(Hum.FloorMaterial)
 				FS(Event,math.min(Round(totalFallDistance,.5),Hum.MaxHealth*.9))
+				wait(.1)
+				Deb=false
 			end
 			saveYPosition = nil
 		else
