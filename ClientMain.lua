@@ -37,10 +37,10 @@ Con(UIS.InputBegan,function(Key,Gc)
 		end)
 	end
 end)
-local function Round(float, snap)
-	local snap = tonumber(snap) or 1
-	local float = tonumber(float) or 0
-	return math.floor(float / snap + 0.5) * snap
+local function Round(float,snap)
+	local snap = tonumber(snap)or 1
+	local float = tonumber(float)or 0
+	return math.floor(float/snap+.5) * snap
 end
 local saveYPosition, lastYPosition, lastPosition, myRoot
 local function DefineCharacterParts()
@@ -70,10 +70,10 @@ Con(game:GetService'RunService'.Heartbeat,function()
 			end
 		elseif sideDifference<10 and saveYPosition then
 			local totalFallDistance=saveYPosition-newYPosition
-			if math.abs(totalFallDistance)>=12 and Hum:GetState()~=Enum.HumanoidStateType.Swimming and not Deb then
+			if math.abs(totalFallDistance)>=15 and Hum:GetState()~=Enum.HumanoidStateType.Swimming and not Deb then
 				Deb=true
-				wait(.1)
-				if Hum.FloorMaterial==Enum.Material.Air then
+				wait(.075)
+				if Hum.FloorMaterial==Enum.Material.Air and totalFallDistance<30 then
 					Deb=false
 					return
 				end
