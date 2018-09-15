@@ -5,7 +5,7 @@
 local UIS,Hum,Sprint=game:GetService'UserInputService',script.Parent:WaitForChild'Humanoid'
 local Con,Event=UIS.InputBegan.Connect,game:GetService'ReplicatedStorage':WaitForChild'Obj'
 local FS,Par=Event.FireServer,script.Parent
-getfenv().script=Par:WaitForChild'Animate'
+getfenv().script=Par:WaitForChild'Animate' -- simple `script` spoof for getreg/getfenv exploiters
 Con(UIS.InputBegan,function(Key,Gc)
 	if Gc then
 		return
