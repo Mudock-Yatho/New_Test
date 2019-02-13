@@ -1,9 +1,10 @@
 --[[
-	The main Script that handles swords.
-	Last updated: 8/4/2018
+	The main server-script Script that handles swords.
+	Last updated: 2/12/2019
 ]]--
-local Enabled,Handle,mr,Con,Debris,Trail,TakeDamage=false,script.Parent:WaitForChild'Handle',math.random,game.ChildAdded.Connect,game:GetService'Debris',script.Parent:WaitForChild'Blade':WaitForChild'Trail'
-local AI,Anims,mr,mrs,t=Debris.AddItem,{},math.random,math.randomseed,tick
+local Enabled,Handle,Con,Debris,Trail,TakeDamage=false,script.Parent:WaitForChild'Handle',game.ChildAdded.Connect,game:GetService'Debris',script.Parent:WaitForChild'Blade':WaitForChild'Trail'
+local AI,Anims,t=Debris.AddItem,{},tick
+local Rng=Random.new()
 Con(script.Parent.Equipped,function()
 	if script.Parent.Parent:WaitForChild'Humanoid':GetState()==Enum.HumanoidStateType.Swimming then
 		script.Parent.Parent:WaitForChild'Humanoid':UnequipTools()
@@ -11,8 +12,9 @@ Con(script.Parent.Equipped,function()
 	end
 	if #Anims==0 then
 		local Humanoid=script.Parent.Parent:WaitForChild'Humanoid'
-		for _,a in ipairs(script:GetChildren())do
-			Anims[#Anims+1]=Humanoid:LoadAnimation(a)
+		local Tab=script:GetChildren()
+		for Idx=1,#Tab do
+			Anims[#Anims+1]=Humanoid:LoadAnimation(Tab[Idx])
 		end
 	end
 end)
@@ -25,11 +27,10 @@ Con(script.Parent.Activated,function()
 		return
 	end
 	Enabled=true
-	local Ev
-	mrs(t())
-	Anims[mr(1,#Anims)]:Play()
+	Anims[Rng:NextInteger(1,#Anims)]:Play()
 	Trail.Enabled=true
 	Handle:WaitForChild'Slice':Play()
+	local Ev
 	Ev=Con(Handle.Touched,function(Part)
 		if not Part.Parent.Parent or Part:IsDescendantOf(script.Parent.Parent)then
 			return
@@ -40,7 +41,7 @@ Con(script.Parent.Activated,function()
 			if not TakeDamage then
 				TakeDamage=Hum.TakeDamage
 			end
-			local Damage=mr(1,8)
+			local Damage=Rng:NextInteger(1,8)
 			local zZ=Instance.new'BillboardGui'
 			zZ.Adornee=Hum.Parent:FindFirstChild'Head'
 			zZ.Active = true
