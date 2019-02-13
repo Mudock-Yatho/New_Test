@@ -3,14 +3,14 @@
 	Last updated: 2/12/2019
 ]]--
 local Enabled,Handle,Con,Debris,Trail,TakeDamage=false,script.Parent:WaitForChild'Handle',game.ChildAdded.Connect,game:GetService'Debris',script.Parent:WaitForChild'Blade':WaitForChild'Trail'
-local AI,Anims,t=Debris.AddItem,{},tick
-local Rng=Random.new()
+local AI,t,Rng,Anims=Debris.AddItem,tick,Random.new()
 Con(script.Parent.Equipped,function()
 	if script.Parent.Parent:WaitForChild'Humanoid':GetState()==Enum.HumanoidStateType.Swimming then
 		script.Parent.Parent:WaitForChild'Humanoid':UnequipTools()
 		return
 	end
-	if #Anims==0 then
+	if not Anims then
+		Anims={}
 		local Humanoid=script.Parent.Parent:WaitForChild'Humanoid'
 		local Tab=script:GetChildren()
 		for Idx=1,#Tab do
