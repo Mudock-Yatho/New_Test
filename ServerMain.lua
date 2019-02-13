@@ -1,6 +1,6 @@
 --[[
 	The server's main script that handles stats and remotes.
-	Last updated: 8/4/2018
+	Last updated: 2/12/2019
 	
 	Quite a few things are localized here that you may notice aren't used, this is because I've removed **1** part of the
 	script that isn't open-sourced.
@@ -33,14 +33,16 @@ Con(game:GetService'Players'.PlayerAdded,function(Player)
 end)
 local Deb={}
 Con(wfc(game:GetService'ReplicatedStorage','Obj').OnServerEvent,function(Player,Damage)
+	-- No, calculating the damage on the client isn't a security issue, this only damages their own character.
 	if not Damage or type(Damage)~='number'or Damage<=0 or Deb[Player.UserId]then
 		warn('['..Player.Name..'|'..Player.UserId..'] Tried to fire `Obj` incorrectly!')
 		Player:Kick'Stop.'
 		return
 	end
 	Deb[Player.UserId]=true
-	if Player.Character and Player.Character:FindFirstChild'Humanoid'then
-		if Player.Character:FindFirstChild'Head'then
+	if Player.Character then
+		local Hum=Player.Character:FindFirstChild'Humanoid'
+		if Hum and Hum.Health>0 and Player.Character:FindFirstChild'Head'then
 			local zZ=Instance.new'BillboardGui'
 			zZ.Adornee=Player.Character:FindFirstChild'Head'
 			zZ.Active = true
@@ -59,7 +61,7 @@ Con(wfc(game:GetService'ReplicatedStorage','Obj').OnServerEvent,function(Player,
 			zZ.Parent=Player.Character:FindFirstChild'Head'
 			game:GetService'Debris':AddItem(zZ,1.5)
 		end
-		Player.Character:FindFirstChild'Humanoid':TakeDamage(Damage)
+		Hum:TakeDamage(Damage)
 	end
 	wa(.15)
 	Deb[Player.UserId]=nil
